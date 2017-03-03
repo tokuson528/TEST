@@ -1,0 +1,97 @@
+//-------------------------------------
+//各種基本設定
+//-------------------------------------
+
+//画像の場所指定
+$imgPath: '../img/'; //画像のパスが変わったら変更してください。例)background: url(#{$imgPath}bg.png);
+
+//スプライト画像の生成（スプライト画像があるときにON）
+// $collection-sprite-dimensions: true; //各画像の横幅・縦幅を追加する
+// $collection-spacing: 10px;           //各画像の間に余白をつける
+// @import "collection/*.png";          //スプライト画像の作成をする "画像の入っているフォルダ名/*.png"
+// @include all-collection-sprites;     //スプライト内の各画像用のCSSを吐き出す
+// $sprites: sprite-map("collection/*.png",$spacing: 10px);//これで各画像の位置を取得する($spacingで画像の間の余白分をとる)
+
+//プレフィックスの対応
+$set-prefix: '' , -moz- , -webkit- , -ms-, -o-;
+
+//-------------------------------------
+//背景画像
+//-------------------------------------
+
+//BG用
+@mixin bg-img($img, $repeat, $div) {
+  background: {
+    image : url($imgPath + $img);
+    size  : image-width($img) /($div) image-height($img) /($div);
+    repeat: $repeat;  
+  }
+}//@include bg-img('wni_logo.png', repeat, 2);
+
+
+//テキスト飛ばしの画像表示
+@mixin txt-img01($img, $display, $div) {
+  width : image-width($img) /($div);
+  height: image-height($img) /($div);
+  background: {
+    image : url($imgPath + $img);
+    size  : image-width($img) /($div) image-height($img) /($div);
+    repeat: no-repeat;  
+  }
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: $display;
+}//@include txt-img01('wni_logo.png', block, 2);
+
+//テキスト飛ばしの画像表示（width、height指定）
+@mixin txt-img02($img, $width, $height, $display) {
+  width : $width;
+  height: $height;
+  background: {
+    image : url($imgPath + $img);
+    size  : $width $height;
+    repeat: no-repeat;  
+  }
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: $display;
+}//@include txt-img02('wni_logo.png', $width, $height, $display);
+
+
+//テキスト飛ばしの画像表示（Sprite画像用）
+@mixin bg-sprite-img($bgImgFolder, $bgImg, $spriteImg, $display, $div) {
+  $ypos : round(nth(sprite-position($sprites, $bgImg), 2) /($div));
+  width : image-width($bgImgFolder + '/' + $bgImg + '.png')/($div);
+  height: image-height($bgImgFolder + '/' + $bgImg + '.png')/($div);
+  background: {
+    image   : url($imgPath + $spriteImg);
+    repeat  : no-repeat;
+    size    : image-width($spriteImg)/($div) image-height($spriteImg)/($div);
+    position: 0 $ypos;
+  }
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: $display;
+}//@include bg-sprite-img(olympic, 'olympic0360', 'olympic-s7ad59b64c5.png', display, 2);
+
+
+//-------------------------------------
+//ベンダープレフィックスを付与
+//-------------------------------------
+
+// プロパティ名にベンダープレフィックスの付与
+@mixin tag-prefix($name, $value) { 
+    @each $prefix in $set-prefix {
+        #{$prefix}#{$name}: $value;
+    }
+}//@include tag-prefix(border-radius, 3px);
+ 
+//値にベンダープレフィックスを付与
+@mixin value-prefix($name, $value) { 
+    @each $prefix in $set-prefix {
+        #{$name}: #{$prefix}$value;
+    }
+}//@include value-prefix(タグ, 値);

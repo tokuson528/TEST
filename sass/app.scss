@@ -1,0 +1,51 @@
+@charset "UTF-8";
+@import "mixin"; //mixinの設定
+
+//------------------------------------------
+//基本：カラー設定
+//------------------------------------------
+$kuro : #000;	//黒
+
+/*====================================================================================
+1）基本
+====================================================================================*/
+
+/*------------------------------------------
+テキストの設定
+------------------------------------------*/
+html:root {font-size: 62.5%;}
+body {font-size: 1.0rem;}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,dt, dd, li,fieldset, form,
+label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, figcaption, figure {
+	font: {
+		size: 16px;
+		size: 1.6rem;
+		weight: normal;
+		family: 'ヒラギノ角ゴ ProN W3', 'HiraKakuProN-W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+	}
+	color 					: $kuro;
+	text-align 			: left;
+	line-height 		: 160%;
+	letter-spacing 	: 0;
+}
+
+/* フォントのバグを削除 */
+body {-webkit-font-smoothing: antialiased;}
+
+/* テキストの位置調整
+------------------------------------------*/
+.ta-le {text-align: left;}
+.ta-ce {text-align: center;}
+.ta-ri {text-align: right;}
+
+/* フォントの太さ
+------------------------------------------*/
+.tw-bo {font-weight: bold;}
+.tw-no {font-weight: normal;}
+
+/*------------------------------------------
+HTML・ bodyの設定
+------------------------------------------*/
+html:root {background: #fff;}
+html,body {overflow-x: hidden;　position: relative;}

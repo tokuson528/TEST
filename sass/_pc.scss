@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+// ブレイクポイントの設定
+$breakPoint-tab : 768px;
+$breakPoint-pc  : 992px;
+
+// PCのコンテンツエリアの横幅
+$width-pc-min: 992px;
+$width-pc-max: 980px;
+
+/* スマホのみ */
+.sp { display: block; @media screen and(min-width: $breakPoint-pc) { display: none;} } //スマホ時
+/* PCのみ */
+.pc { display: none;  @media screen and(min-width: $breakPoint-pc) { display: block;}} //PC時
+
+/*====================================================================================
+PCの設定
+====================================================================================*/
+@media screen and(min-width: $breakPoint-pc){
+
+}//@media screen and()
